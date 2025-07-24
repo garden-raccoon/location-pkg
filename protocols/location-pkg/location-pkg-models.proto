@@ -9,5 +9,6 @@ message Location {
     string           country    =3;
     repeated string  lang = 4;
     string           currency = 5;
+    string           city = 6;
 }
 

@@ -28,6 +28,7 @@ type Location struct {
 	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
 	Lang          []string               `protobuf:"bytes,4,rep,name=lang,proto3" json:"lang,omitempty"`
 	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
+	City          string                 `protobuf:"bytes,6,opt,name=city,proto3" json:"city,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -97,17 +98,25 @@ func (x *Location) GetCurrency() string {
 	return ""
 }
 
+func (x *Location) GetCity() string {
+	if x != nil {
+		return x.City
+	}
+	return ""
+}
+
 var File_location_pkg_models_proto protoreflect.FileDescriptor
 
 const file_location_pkg_models_proto_rawDesc = "" +
 	"\n" +
-	"\x19location-pkg-models.proto\x12\x06models\"\x8d\x01\n" +
+	"\x19location-pkg-models.proto\x12\x06models\"\xa1\x01\n" +
 	"\bLocation\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x12\n" +
 	"\x04lang\x18\x04 \x03(\tR\x04lang\x12\x1a\n" +
-	"\bcurrency\x18\x05 \x01(\tR\bcurrencyB\x18Z\x16protocols/location-pkgb\x06proto3"
+	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x12\n" +
+	"\x04city\x18\x06 \x01(\tR\x04cityB\x18Z\x16protocols/location-pkgb\x06proto3"
 
 var (
 	file_location_pkg_models_proto_rawDescOnce sync.Once

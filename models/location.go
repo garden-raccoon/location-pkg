@@ -11,6 +11,7 @@ type Location struct {
 	Country      string    `json:"country"`
 	Lang         []string  `json:"lang"`
 	Currency     string    `json:"currency"`
+	City         string    `json:"city"`
 }
 
 // Proto is
@@ -21,6 +22,7 @@ func Proto(loc *Location) (*proto.Location, error) {
 		Country:      loc.Country,
 		Lang:         loc.Lang,
 		Currency:     loc.Currency,
+		City:         loc.City,
 	}
 	return d, nil
 }
@@ -32,5 +34,6 @@ func LocationFromProto(pb *proto.Location) *Location {
 		Country:      pb.Country,
 		Lang:         pb.Lang,
 		Currency:     pb.Currency,
+		City:         pb.City,
 	}
 }
