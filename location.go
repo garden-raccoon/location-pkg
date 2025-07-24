@@ -23,6 +23,7 @@ type LocationPkgAPI interface {
 	DeleteLocation(locationUuid uuid.UUID) error
 	LocationByUuid(locationUuid uuid.UUID) (*models.Location, error)
 	GetAllLocations() ([]*models.Location, error)
+	UpdateLocation(s *models.Location) error
 	HealthCheck() error
 	// Close GRPC Api connection
 	Close() error
@@ -51,7 +52,15 @@ func New(addr string, timeOut time.Duration) (LocationPkgAPI, error) {
 	api.LocationServiceClient = proto.NewLocationServiceClient(api.ClientConn)
 	return api, nil
 }
-
+func (api *Api) UpdateLocation(s *models.Location) error {
+	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
+	defer cancel()
+	_, err := api.LocationServiceClient.UpdateLocation(ctx, s.Proto())
+	if err != nil {
+		return fmt.Errorf("call MealsByLocation: %w", err)
+	}
+	return nil
+}
 func (api *Api) GetAllLocations() ([]*models.Location, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
 	defer cancel()
@@ -77,11 +86,7 @@ func (api *Api) DeleteLocation(locationUuid uuid.UUID) error {
 func (api *Api) CreateOrUpdateLocation(s *models.Location) (err error) {
 	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
 	defer cancel()
-	Locations, err := models.Proto(s)
-	if err != nil {
-		return fmt.Errorf("failed to CreateOrUpdateLocation %w", err)
-	}
-	_, err = api.LocationServiceClient.CreateOrUpdateLocation(ctx, Locations)
+	_, err = api.LocationServiceClient.CreateOrUpdateLocation(ctx, s.Proto())
 	if err != nil {
 		return fmt.Errorf("create Location api request: %w", err)
 	}

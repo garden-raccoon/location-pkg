@@ -15,8 +15,8 @@ type Location struct {
 }
 
 // Proto is
-func Proto(loc *Location) (*proto.Location, error) {
-	d := &proto.Location{
+func (loc Location) Proto() *proto.Location {
+	return &proto.Location{
 		LocationUuid: loc.LocationUuid.Bytes(),
 		Name:         loc.Name,
 		Country:      loc.Country,
@@ -24,7 +24,7 @@ func Proto(loc *Location) (*proto.Location, error) {
 		Currency:     loc.Currency,
 		City:         loc.City,
 	}
-	return d, nil
+
 }
 
 func LocationFromProto(pb *proto.Location) *Location {
@@ -37,18 +37,6 @@ func LocationFromProto(pb *proto.Location) *Location {
 		City:         pb.City,
 	}
 }
-
-/*
-func MealsFromProto(pb *proto.Meals) []*Meal {
-	var meals []*Meal
-	for _, b := range pb.Meals {
-		meal := MealFromProto(b)
-		meals = append(meals, meal)
-	}
-	return meals
-}
-
-*/
 
 func LocationsFromProto(pb *proto.AllLocations) []*Location {
 	var locations []*Location

@@ -10,6 +10,7 @@ service locationService {
     rpc LocationByUUID(LocationGetReq) returns (models.Location);
     rpc GetAllLocations(EmptyLocation) returns (models.AllLocations);
     rpc DeleteLocation(LocationDeleteReq) returns(EmptyLocation);
+    rpc UpdateLocation(models.Location) returns(EmptyLocation);
 
 }
 message LocationGetReq {

@@ -154,12 +154,13 @@ const file_location_pkg_service_proto_rawDesc = "" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\"8\n" +
 	"\x11LocationDeleteReq\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\"\x0f\n" +
-	"\rEmptyLocation2\x94\x02\n" +
+	"\rEmptyLocation2\xcf\x02\n" +
 	"\x0flocationService\x12A\n" +
 	"\x16CreateOrUpdateLocation\x12\x10.models.Location\x1a\x15.models.EmptyLocation\x12:\n" +
 	"\x0eLocationByUUID\x12\x16.models.LocationGetReq\x1a\x10.models.Location\x12>\n" +
 	"\x0fGetAllLocations\x12\x15.models.EmptyLocation\x1a\x14.models.AllLocations\x12B\n" +
-	"\x0eDeleteLocation\x12\x19.models.LocationDeleteReq\x1a\x15.models.EmptyLocationB\x18Z\x16protocols/location-pkgb\x06proto3"
+	"\x0eDeleteLocation\x12\x19.models.LocationDeleteReq\x1a\x15.models.EmptyLocation\x129\n" +
+	"\x0eUpdateLocation\x12\x10.models.Location\x1a\x15.models.EmptyLocationB\x18Z\x16protocols/location-pkgb\x06proto3"
 
 var (
 	file_location_pkg_service_proto_rawDescOnce sync.Once
@@ -186,12 +187,14 @@ var file_location_pkg_service_proto_depIdxs = []int32{
 	0, // 1: models.locationService.LocationByUUID:input_type -> models.LocationGetReq
 	2, // 2: models.locationService.GetAllLocations:input_type -> models.EmptyLocation
 	1, // 3: models.locationService.DeleteLocation:input_type -> models.LocationDeleteReq
-	2, // 4: models.locationService.CreateOrUpdateLocation:output_type -> models.EmptyLocation
-	3, // 5: models.locationService.LocationByUUID:output_type -> models.Location
-	4, // 6: models.locationService.GetAllLocations:output_type -> models.AllLocations
-	2, // 7: models.locationService.DeleteLocation:output_type -> models.EmptyLocation
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	3, // 4: models.locationService.UpdateLocation:input_type -> models.Location
+	2, // 5: models.locationService.CreateOrUpdateLocation:output_type -> models.EmptyLocation
+	3, // 6: models.locationService.LocationByUUID:output_type -> models.Location
+	4, // 7: models.locationService.GetAllLocations:output_type -> models.AllLocations
+	2, // 8: models.locationService.DeleteLocation:output_type -> models.EmptyLocation
+	2, // 9: models.locationService.UpdateLocation:output_type -> models.EmptyLocation
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
