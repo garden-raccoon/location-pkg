@@ -1,0 +1,23 @@
+syntax = "proto3";
+package models;
+
+option go_package = "protocols/location-pkg";
+
+import "location-pkg-models.proto";
+
+service locationService {
+    rpc CreateOrUpdateLocation(models.Location) returns(EmptyLocation);
+    rpc LocationByUUID(LocationGetReq) returns (models.Location);
+    rpc DeleteLocation(LocationDeleteReq) returns(EmptyLocation);
+
+}
+message LocationGetReq {
+    bytes location_uuid = 1;
+}
+
+message LocationDeleteReq {
+    bytes location_uuid = 1;
+}
+
+message EmptyLocation {}
+
