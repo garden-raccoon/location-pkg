@@ -8,6 +8,7 @@ import "location-pkg-models.proto";
 service locationService {
     rpc CreateOrUpdateLocation(models.Location) returns(EmptyLocation);
     rpc LocationByUUID(LocationGetReq) returns (models.Location);
+    rpc GetAllLocations(EmptyLocation) returns (models.AllLocations);
     rpc DeleteLocation(LocationDeleteReq) returns(EmptyLocation);
 
 }

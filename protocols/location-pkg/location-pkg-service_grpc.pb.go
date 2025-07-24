@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	LocationService_CreateOrUpdateLocation_FullMethodName = "/models.locationService/CreateOrUpdateLocation"
 	LocationService_LocationByUUID_FullMethodName         = "/models.locationService/LocationByUUID"
+	LocationService_GetAllLocations_FullMethodName        = "/models.locationService/GetAllLocations"
 	LocationService_DeleteLocation_FullMethodName         = "/models.locationService/DeleteLocation"
 )
 
@@ -30,6 +31,7 @@ const (
 type LocationServiceClient interface {
 	CreateOrUpdateLocation(ctx context.Context, in *Location, opts ...grpc.CallOption) (*EmptyLocation, error)
 	LocationByUUID(ctx context.Context, in *LocationGetReq, opts ...grpc.CallOption) (*Location, error)
+	GetAllLocations(ctx context.Context, in *EmptyLocation, opts ...grpc.CallOption) (*AllLocations, error)
 	DeleteLocation(ctx context.Context, in *LocationDeleteReq, opts ...grpc.CallOption) (*EmptyLocation, error)
 }
 
@@ -61,6 +63,16 @@ func (c *locationServiceClient) LocationByUUID(ctx context.Context, in *Location
 	return out, nil
 }
 
+func (c *locationServiceClient) GetAllLocations(ctx context.Context, in *EmptyLocation, opts ...grpc.CallOption) (*AllLocations, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AllLocations)
+	err := c.cc.Invoke(ctx, LocationService_GetAllLocations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *locationServiceClient) DeleteLocation(ctx context.Context, in *LocationDeleteReq, opts ...grpc.CallOption) (*EmptyLocation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EmptyLocation)
@@ -77,6 +89,7 @@ func (c *locationServiceClient) DeleteLocation(ctx context.Context, in *Location
 type LocationServiceServer interface {
 	CreateOrUpdateLocation(context.Context, *Location) (*EmptyLocation, error)
 	LocationByUUID(context.Context, *LocationGetReq) (*Location, error)
+	GetAllLocations(context.Context, *EmptyLocation) (*AllLocations, error)
 	DeleteLocation(context.Context, *LocationDeleteReq) (*EmptyLocation, error)
 	mustEmbedUnimplementedLocationServiceServer()
 }
@@ -93,6 +106,9 @@ func (UnimplementedLocationServiceServer) CreateOrUpdateLocation(context.Context
 }
 func (UnimplementedLocationServiceServer) LocationByUUID(context.Context, *LocationGetReq) (*Location, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LocationByUUID not implemented")
+}
+func (UnimplementedLocationServiceServer) GetAllLocations(context.Context, *EmptyLocation) (*AllLocations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllLocations not implemented")
 }
 func (UnimplementedLocationServiceServer) DeleteLocation(context.Context, *LocationDeleteReq) (*EmptyLocation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLocation not implemented")
@@ -154,6 +170,24 @@ func _LocationService_LocationByUUID_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LocationService_GetAllLocations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyLocation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationServiceServer).GetAllLocations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationService_GetAllLocations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationServiceServer).GetAllLocations(ctx, req.(*EmptyLocation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _LocationService_DeleteLocation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LocationDeleteReq)
 	if err := dec(in); err != nil {
@@ -186,6 +220,10 @@ var LocationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LocationByUUID",
 			Handler:    _LocationService_LocationByUUID_Handler,
+		},
+		{
+			MethodName: "GetAllLocations",
+			Handler:    _LocationService_GetAllLocations_Handler,
 		},
 		{
 			MethodName: "DeleteLocation",

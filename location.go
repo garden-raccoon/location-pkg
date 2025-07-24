@@ -22,6 +22,7 @@ type LocationPkgAPI interface {
 	CreateOrUpdateLocation(s *models.Location) error
 	DeleteLocation(locationUuid uuid.UUID) error
 	LocationByUuid(locationUuid uuid.UUID) (*models.Location, error)
+	GetAllLocations() ([]*models.Location, error)
 	HealthCheck() error
 	// Close GRPC Api connection
 	Close() error
@@ -51,6 +52,15 @@ func New(addr string, timeOut time.Duration) (LocationPkgAPI, error) {
 	return api, nil
 }
 
+func (api *Api) GetAllLocations() ([]*models.Location, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
+	defer cancel()
+	resp, err := api.LocationServiceClient.GetAllLocations(ctx, &proto.EmptyLocation{})
+	if err != nil {
+		return nil, fmt.Errorf("GetMeals api request: %w", err)
+	}
+	return models.LocationsFromProto(resp), nil
+}
 func (api *Api) DeleteLocation(locationUuid uuid.UUID) error {
 	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
 	defer cancel()

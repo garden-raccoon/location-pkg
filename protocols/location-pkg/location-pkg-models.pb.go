@@ -105,6 +105,50 @@ func (x *Location) GetCity() string {
 	return ""
 }
 
+type AllLocations struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Locations     []*Location            `protobuf:"bytes,1,rep,name=locations,proto3" json:"locations,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AllLocations) Reset() {
+	*x = AllLocations{}
+	mi := &file_location_pkg_models_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AllLocations) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AllLocations) ProtoMessage() {}
+
+func (x *AllLocations) ProtoReflect() protoreflect.Message {
+	mi := &file_location_pkg_models_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AllLocations.ProtoReflect.Descriptor instead.
+func (*AllLocations) Descriptor() ([]byte, []int) {
+	return file_location_pkg_models_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *AllLocations) GetLocations() []*Location {
+	if x != nil {
+		return x.Locations
+	}
+	return nil
+}
+
 var File_location_pkg_models_proto protoreflect.FileDescriptor
 
 const file_location_pkg_models_proto_rawDesc = "" +
@@ -116,7 +160,9 @@ const file_location_pkg_models_proto_rawDesc = "" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x12\n" +
 	"\x04lang\x18\x04 \x03(\tR\x04lang\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04city\x18\x06 \x01(\tR\x04cityB\x18Z\x16protocols/location-pkgb\x06proto3"
+	"\x04city\x18\x06 \x01(\tR\x04city\">\n" +
+	"\fAllLocations\x12.\n" +
+	"\tlocations\x18\x01 \x03(\v2\x10.models.LocationR\tlocationsB\x18Z\x16protocols/location-pkgb\x06proto3"
 
 var (
 	file_location_pkg_models_proto_rawDescOnce sync.Once
@@ -130,16 +176,18 @@ func file_location_pkg_models_proto_rawDescGZIP() []byte {
 	return file_location_pkg_models_proto_rawDescData
 }
 
-var file_location_pkg_models_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_location_pkg_models_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_location_pkg_models_proto_goTypes = []any{
-	(*Location)(nil), // 0: models.Location
+	(*Location)(nil),     // 0: models.Location
+	(*AllLocations)(nil), // 1: models.AllLocations
 }
 var file_location_pkg_models_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: models.AllLocations.locations:type_name -> models.Location
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_location_pkg_models_proto_init() }
@@ -153,7 +201,7 @@ func file_location_pkg_models_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_location_pkg_models_proto_rawDesc), len(file_location_pkg_models_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

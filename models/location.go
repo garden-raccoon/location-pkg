@@ -37,3 +37,23 @@ func LocationFromProto(pb *proto.Location) *Location {
 		City:         pb.City,
 	}
 }
+
+/*
+func MealsFromProto(pb *proto.Meals) []*Meal {
+	var meals []*Meal
+	for _, b := range pb.Meals {
+		meal := MealFromProto(b)
+		meals = append(meals, meal)
+	}
+	return meals
+}
+
+*/
+
+func LocationsFromProto(pb *proto.AllLocations) []*Location {
+	var locations []*Location
+	for _, loc := range pb.Locations {
+		locations = append(locations, LocationFromProto(loc))
+	}
+	return locations
+}

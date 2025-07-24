@@ -12,3 +12,6 @@ message Location {
     string           city = 6;
 }
 
+message AllLocations {
+    repeated Location locations = 1;
+}
