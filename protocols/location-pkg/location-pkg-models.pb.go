@@ -29,6 +29,7 @@ type Location struct {
 	Lang          []string               `protobuf:"bytes,4,rep,name=lang,proto3" json:"lang,omitempty"`
 	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
 	City          string                 `protobuf:"bytes,6,opt,name=city,proto3" json:"city,omitempty"`
+	Active        bool                   `protobuf:"varint,7,opt,name=active,proto3" json:"active,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -105,6 +106,13 @@ func (x *Location) GetCity() string {
 	return ""
 }
 
+func (x *Location) GetActive() bool {
+	if x != nil {
+		return x.Active
+	}
+	return false
+}
+
 type AllLocations struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Locations     []*Location            `protobuf:"bytes,1,rep,name=locations,proto3" json:"locations,omitempty"`
@@ -153,14 +161,15 @@ var File_location_pkg_models_proto protoreflect.FileDescriptor
 
 const file_location_pkg_models_proto_rawDesc = "" +
 	"\n" +
-	"\x19location-pkg-models.proto\x12\x06models\"\xa1\x01\n" +
+	"\x19location-pkg-models.proto\x12\x06models\"\xb9\x01\n" +
 	"\bLocation\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x12\n" +
 	"\x04lang\x18\x04 \x03(\tR\x04lang\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04city\x18\x06 \x01(\tR\x04city\">\n" +
+	"\x04city\x18\x06 \x01(\tR\x04city\x12\x16\n" +
+	"\x06active\x18\a \x01(\bR\x06active\">\n" +
 	"\fAllLocations\x12.\n" +
 	"\tlocations\x18\x01 \x03(\v2\x10.models.LocationR\tlocationsB\x18Z\x16protocols/location-pkgb\x06proto3"
 

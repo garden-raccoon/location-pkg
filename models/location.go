@@ -12,6 +12,7 @@ type Location struct {
 	Lang         []string  `json:"lang"`
 	Currency     string    `json:"currency"`
 	City         string    `json:"city"`
+	Active       bool      `json:"active"`
 }
 
 // Proto is
@@ -23,6 +24,7 @@ func (loc Location) Proto() *proto.Location {
 		Lang:         loc.Lang,
 		Currency:     loc.Currency,
 		City:         loc.City,
+		Active:       loc.Active,
 	}
 
 }
@@ -35,6 +37,7 @@ func LocationFromProto(pb *proto.Location) *Location {
 		Lang:         pb.Lang,
 		Currency:     pb.Currency,
 		City:         pb.City,
+		Active:       pb.Active,
 	}
 }
 

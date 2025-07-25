@@ -10,6 +10,7 @@ message Location {
     repeated string  lang = 4;
     string           currency = 5;
     string           city = 6;
+    bool             active =7;
 }
 
 message AllLocations {
