@@ -21,6 +21,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type MealLocationReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MealUuid      []byte                 `protobuf:"bytes,1,opt,name=meal_uuid,json=mealUuid,proto3" json:"meal_uuid,omitempty"`
+	LocationUuid  []byte                 `protobuf:"bytes,2,opt,name=location_uuid,json=locationUuid,proto3" json:"location_uuid,omitempty"`
+	Price         float32                `protobuf:"fixed32,3,opt,name=price,proto3" json:"price,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MealLocationReq) Reset() {
+	*x = MealLocationReq{}
+	mi := &file_location_pkg_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MealLocationReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MealLocationReq) ProtoMessage() {}
+
+func (x *MealLocationReq) ProtoReflect() protoreflect.Message {
+	mi := &file_location_pkg_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MealLocationReq.ProtoReflect.Descriptor instead.
+func (*MealLocationReq) Descriptor() ([]byte, []int) {
+	return file_location_pkg_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *MealLocationReq) GetMealUuid() []byte {
+	if x != nil {
+		return x.MealUuid
+	}
+	return nil
+}
+
+func (x *MealLocationReq) GetLocationUuid() []byte {
+	if x != nil {
+		return x.LocationUuid
+	}
+	return nil
+}
+
+func (x *MealLocationReq) GetPrice() float32 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
 type LocationGetReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	LocationUuid  []byte                 `protobuf:"bytes,1,opt,name=location_uuid,json=locationUuid,proto3" json:"location_uuid,omitempty"`
@@ -30,7 +90,7 @@ type LocationGetReq struct {
 
 func (x *LocationGetReq) Reset() {
 	*x = LocationGetReq{}
-	mi := &file_location_pkg_service_proto_msgTypes[0]
+	mi := &file_location_pkg_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +102,7 @@ func (x *LocationGetReq) String() string {
 func (*LocationGetReq) ProtoMessage() {}
 
 func (x *LocationGetReq) ProtoReflect() protoreflect.Message {
-	mi := &file_location_pkg_service_proto_msgTypes[0]
+	mi := &file_location_pkg_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +115,7 @@ func (x *LocationGetReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocationGetReq.ProtoReflect.Descriptor instead.
 func (*LocationGetReq) Descriptor() ([]byte, []int) {
-	return file_location_pkg_service_proto_rawDescGZIP(), []int{0}
+	return file_location_pkg_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *LocationGetReq) GetLocationUuid() []byte {
@@ -74,7 +134,7 @@ type LocationDeleteReq struct {
 
 func (x *LocationDeleteReq) Reset() {
 	*x = LocationDeleteReq{}
-	mi := &file_location_pkg_service_proto_msgTypes[1]
+	mi := &file_location_pkg_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +146,7 @@ func (x *LocationDeleteReq) String() string {
 func (*LocationDeleteReq) ProtoMessage() {}
 
 func (x *LocationDeleteReq) ProtoReflect() protoreflect.Message {
-	mi := &file_location_pkg_service_proto_msgTypes[1]
+	mi := &file_location_pkg_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +159,7 @@ func (x *LocationDeleteReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LocationDeleteReq.ProtoReflect.Descriptor instead.
 func (*LocationDeleteReq) Descriptor() ([]byte, []int) {
-	return file_location_pkg_service_proto_rawDescGZIP(), []int{1}
+	return file_location_pkg_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *LocationDeleteReq) GetLocationUuid() []byte {
@@ -117,7 +177,7 @@ type EmptyLocation struct {
 
 func (x *EmptyLocation) Reset() {
 	*x = EmptyLocation{}
-	mi := &file_location_pkg_service_proto_msgTypes[2]
+	mi := &file_location_pkg_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -129,7 +189,7 @@ func (x *EmptyLocation) String() string {
 func (*EmptyLocation) ProtoMessage() {}
 
 func (x *EmptyLocation) ProtoReflect() protoreflect.Message {
-	mi := &file_location_pkg_service_proto_msgTypes[2]
+	mi := &file_location_pkg_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -142,25 +202,30 @@ func (x *EmptyLocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EmptyLocation.ProtoReflect.Descriptor instead.
 func (*EmptyLocation) Descriptor() ([]byte, []int) {
-	return file_location_pkg_service_proto_rawDescGZIP(), []int{2}
+	return file_location_pkg_service_proto_rawDescGZIP(), []int{3}
 }
 
 var File_location_pkg_service_proto protoreflect.FileDescriptor
 
 const file_location_pkg_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1alocation-pkg-service.proto\x12\x06models\x1a\x19location-pkg-models.proto\"5\n" +
+	"\x1alocation-pkg-service.proto\x12\x06models\x1a\x19location-pkg-models.proto\"i\n" +
+	"\x0fMealLocationReq\x12\x1b\n" +
+	"\tmeal_uuid\x18\x01 \x01(\fR\bmealUuid\x12#\n" +
+	"\rlocation_uuid\x18\x02 \x01(\fR\flocationUuid\x12\x14\n" +
+	"\x05price\x18\x03 \x01(\x02R\x05price\"5\n" +
 	"\x0eLocationGetReq\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\"8\n" +
 	"\x11LocationDeleteReq\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\"\x0f\n" +
-	"\rEmptyLocation2\xcf\x02\n" +
+	"\rEmptyLocation2\x8f\x03\n" +
 	"\x0flocationService\x12A\n" +
 	"\x16CreateOrUpdateLocation\x12\x10.models.Location\x1a\x15.models.EmptyLocation\x12:\n" +
 	"\x0eLocationByUUID\x12\x16.models.LocationGetReq\x1a\x10.models.Location\x12>\n" +
 	"\x0fGetAllLocations\x12\x15.models.EmptyLocation\x1a\x14.models.AllLocations\x12B\n" +
 	"\x0eDeleteLocation\x12\x19.models.LocationDeleteReq\x1a\x15.models.EmptyLocation\x129\n" +
-	"\x0eUpdateLocation\x12\x10.models.Location\x1a\x15.models.EmptyLocationB\x18Z\x16protocols/location-pkgb\x06proto3"
+	"\x0eUpdateLocation\x12\x10.models.Location\x1a\x15.models.EmptyLocation\x12>\n" +
+	"\fUpdatePrices\x12\x17.models.MealLocationReq\x1a\x15.models.EmptyLocationB\x18Z\x16protocols/location-pkgb\x06proto3"
 
 var (
 	file_location_pkg_service_proto_rawDescOnce sync.Once
@@ -174,27 +239,30 @@ func file_location_pkg_service_proto_rawDescGZIP() []byte {
 	return file_location_pkg_service_proto_rawDescData
 }
 
-var file_location_pkg_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_location_pkg_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_location_pkg_service_proto_goTypes = []any{
-	(*LocationGetReq)(nil),    // 0: models.LocationGetReq
-	(*LocationDeleteReq)(nil), // 1: models.LocationDeleteReq
-	(*EmptyLocation)(nil),     // 2: models.EmptyLocation
-	(*Location)(nil),          // 3: models.Location
-	(*AllLocations)(nil),      // 4: models.AllLocations
+	(*MealLocationReq)(nil),   // 0: models.MealLocationReq
+	(*LocationGetReq)(nil),    // 1: models.LocationGetReq
+	(*LocationDeleteReq)(nil), // 2: models.LocationDeleteReq
+	(*EmptyLocation)(nil),     // 3: models.EmptyLocation
+	(*Location)(nil),          // 4: models.Location
+	(*AllLocations)(nil),      // 5: models.AllLocations
 }
 var file_location_pkg_service_proto_depIdxs = []int32{
-	3, // 0: models.locationService.CreateOrUpdateLocation:input_type -> models.Location
-	0, // 1: models.locationService.LocationByUUID:input_type -> models.LocationGetReq
-	2, // 2: models.locationService.GetAllLocations:input_type -> models.EmptyLocation
-	1, // 3: models.locationService.DeleteLocation:input_type -> models.LocationDeleteReq
-	3, // 4: models.locationService.UpdateLocation:input_type -> models.Location
-	2, // 5: models.locationService.CreateOrUpdateLocation:output_type -> models.EmptyLocation
-	3, // 6: models.locationService.LocationByUUID:output_type -> models.Location
-	4, // 7: models.locationService.GetAllLocations:output_type -> models.AllLocations
-	2, // 8: models.locationService.DeleteLocation:output_type -> models.EmptyLocation
-	2, // 9: models.locationService.UpdateLocation:output_type -> models.EmptyLocation
-	5, // [5:10] is the sub-list for method output_type
-	0, // [0:5] is the sub-list for method input_type
+	4, // 0: models.locationService.CreateOrUpdateLocation:input_type -> models.Location
+	1, // 1: models.locationService.LocationByUUID:input_type -> models.LocationGetReq
+	3, // 2: models.locationService.GetAllLocations:input_type -> models.EmptyLocation
+	2, // 3: models.locationService.DeleteLocation:input_type -> models.LocationDeleteReq
+	4, // 4: models.locationService.UpdateLocation:input_type -> models.Location
+	0, // 5: models.locationService.UpdatePrices:input_type -> models.MealLocationReq
+	3, // 6: models.locationService.CreateOrUpdateLocation:output_type -> models.EmptyLocation
+	4, // 7: models.locationService.LocationByUUID:output_type -> models.Location
+	5, // 8: models.locationService.GetAllLocations:output_type -> models.AllLocations
+	3, // 9: models.locationService.DeleteLocation:output_type -> models.EmptyLocation
+	3, // 10: models.locationService.UpdateLocation:output_type -> models.EmptyLocation
+	3, // 11: models.locationService.UpdatePrices:output_type -> models.EmptyLocation
+	6, // [6:12] is the sub-list for method output_type
+	0, // [0:6] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -212,7 +280,7 @@ func file_location_pkg_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_location_pkg_service_proto_rawDesc), len(file_location_pkg_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -24,6 +24,7 @@ const (
 	LocationService_GetAllLocations_FullMethodName        = "/models.locationService/GetAllLocations"
 	LocationService_DeleteLocation_FullMethodName         = "/models.locationService/DeleteLocation"
 	LocationService_UpdateLocation_FullMethodName         = "/models.locationService/UpdateLocation"
+	LocationService_UpdatePrices_FullMethodName           = "/models.locationService/UpdatePrices"
 )
 
 // LocationServiceClient is the client API for LocationService service.
@@ -35,6 +36,7 @@ type LocationServiceClient interface {
 	GetAllLocations(ctx context.Context, in *EmptyLocation, opts ...grpc.CallOption) (*AllLocations, error)
 	DeleteLocation(ctx context.Context, in *LocationDeleteReq, opts ...grpc.CallOption) (*EmptyLocation, error)
 	UpdateLocation(ctx context.Context, in *Location, opts ...grpc.CallOption) (*EmptyLocation, error)
+	UpdatePrices(ctx context.Context, in *MealLocationReq, opts ...grpc.CallOption) (*EmptyLocation, error)
 }
 
 type locationServiceClient struct {
@@ -95,6 +97,16 @@ func (c *locationServiceClient) UpdateLocation(ctx context.Context, in *Location
 	return out, nil
 }
 
+func (c *locationServiceClient) UpdatePrices(ctx context.Context, in *MealLocationReq, opts ...grpc.CallOption) (*EmptyLocation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EmptyLocation)
+	err := c.cc.Invoke(ctx, LocationService_UpdatePrices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LocationServiceServer is the server API for LocationService service.
 // All implementations must embed UnimplementedLocationServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type LocationServiceServer interface {
 	GetAllLocations(context.Context, *EmptyLocation) (*AllLocations, error)
 	DeleteLocation(context.Context, *LocationDeleteReq) (*EmptyLocation, error)
 	UpdateLocation(context.Context, *Location) (*EmptyLocation, error)
+	UpdatePrices(context.Context, *MealLocationReq) (*EmptyLocation, error)
 	mustEmbedUnimplementedLocationServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedLocationServiceServer) DeleteLocation(context.Context, *Locat
 }
 func (UnimplementedLocationServiceServer) UpdateLocation(context.Context, *Location) (*EmptyLocation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateLocation not implemented")
+}
+func (UnimplementedLocationServiceServer) UpdatePrices(context.Context, *MealLocationReq) (*EmptyLocation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePrices not implemented")
 }
 func (UnimplementedLocationServiceServer) mustEmbedUnimplementedLocationServiceServer() {}
 func (UnimplementedLocationServiceServer) testEmbeddedByValue()                         {}
@@ -240,6 +256,24 @@ func _LocationService_UpdateLocation_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LocationService_UpdatePrices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MealLocationReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LocationServiceServer).UpdatePrices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LocationService_UpdatePrices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LocationServiceServer).UpdatePrices(ctx, req.(*MealLocationReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LocationService_ServiceDesc is the grpc.ServiceDesc for LocationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var LocationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateLocation",
 			Handler:    _LocationService_UpdateLocation_Handler,
+		},
+		{
+			MethodName: "UpdatePrices",
+			Handler:    _LocationService_UpdatePrices_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

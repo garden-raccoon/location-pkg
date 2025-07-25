@@ -24,6 +24,7 @@ type LocationPkgAPI interface {
 	LocationByUuid(locationUuid uuid.UUID) (*models.Location, error)
 	GetAllLocations() ([]*models.Location, error)
 	UpdateLocation(s *models.Location) error
+	UpdatePrices(m *models.MealLocation) error
 	HealthCheck() error
 	// Close GRPC Api connection
 	Close() error
@@ -51,6 +52,20 @@ func New(addr string, timeOut time.Duration) (LocationPkgAPI, error) {
 
 	api.LocationServiceClient = proto.NewLocationServiceClient(api.ClientConn)
 	return api, nil
+}
+func (api *Api) UpdatePrices(m *models.MealLocation) error {
+	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
+	defer cancel()
+	req := &proto.MealLocationReq{
+		MealUuid:     m.MealUUID.Bytes(),
+		LocationUuid: m.LocationUuid.Bytes(),
+		Price:        float32(m.Price),
+	}
+	_, err := api.LocationServiceClient.UpdatePrices(ctx, req)
+	if err != nil {
+		return fmt.Errorf("call UpdatePrices: %w", err)
+	}
+	return nil
 }
 func (api *Api) UpdateLocation(s *models.Location) error {
 	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)

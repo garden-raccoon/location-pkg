@@ -14,6 +14,12 @@ type Location struct {
 	City         string      `json:"city"`
 	Activeness   *Activeness `json:"activeness"`
 }
+type MealLocation struct {
+	LocationUuid uuid.UUID `json:"location_uuid"`
+	MealUUID     uuid.UUID `json:"meal_uuid"`
+	Price        float64   `json:"price"`
+}
+
 type Activeness struct {
 	IsActive bool `json:"is_active"`
 }

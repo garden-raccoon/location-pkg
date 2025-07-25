@@ -11,7 +11,13 @@ service locationService {
     rpc GetAllLocations(EmptyLocation) returns (models.AllLocations);
     rpc DeleteLocation(LocationDeleteReq) returns(EmptyLocation);
     rpc UpdateLocation(models.Location) returns(EmptyLocation);
+    rpc UpdatePrices(MealLocationReq) returns(EmptyLocation);
+}
 
+message MealLocationReq {
+    bytes meal_uuid =1;
+    bytes location_uuid =2;
+    float price =3;
 }
 message LocationGetReq {
     bytes location_uuid = 1;
