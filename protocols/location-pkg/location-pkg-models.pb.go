@@ -29,7 +29,7 @@ type Location struct {
 	Lang          []string               `protobuf:"bytes,4,rep,name=lang,proto3" json:"lang,omitempty"`
 	Currency      string                 `protobuf:"bytes,5,opt,name=currency,proto3" json:"currency,omitempty"`
 	City          string                 `protobuf:"bytes,6,opt,name=city,proto3" json:"city,omitempty"`
-	Active        bool                   `protobuf:"varint,7,opt,name=active,proto3" json:"active,omitempty"`
+	Activeness    *Activeness            `protobuf:"bytes,7,opt,name=Activeness,proto3" json:"Activeness,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -106,9 +106,53 @@ func (x *Location) GetCity() string {
 	return ""
 }
 
-func (x *Location) GetActive() bool {
+func (x *Location) GetActiveness() *Activeness {
 	if x != nil {
-		return x.Active
+		return x.Activeness
+	}
+	return nil
+}
+
+type Activeness struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IsActive      bool                   `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Activeness) Reset() {
+	*x = Activeness{}
+	mi := &file_location_pkg_models_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Activeness) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Activeness) ProtoMessage() {}
+
+func (x *Activeness) ProtoReflect() protoreflect.Message {
+	mi := &file_location_pkg_models_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Activeness.ProtoReflect.Descriptor instead.
+func (*Activeness) Descriptor() ([]byte, []int) {
+	return file_location_pkg_models_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Activeness) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
 	}
 	return false
 }
@@ -122,7 +166,7 @@ type AllLocations struct {
 
 func (x *AllLocations) Reset() {
 	*x = AllLocations{}
-	mi := &file_location_pkg_models_proto_msgTypes[1]
+	mi := &file_location_pkg_models_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -134,7 +178,7 @@ func (x *AllLocations) String() string {
 func (*AllLocations) ProtoMessage() {}
 
 func (x *AllLocations) ProtoReflect() protoreflect.Message {
-	mi := &file_location_pkg_models_proto_msgTypes[1]
+	mi := &file_location_pkg_models_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -147,7 +191,7 @@ func (x *AllLocations) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllLocations.ProtoReflect.Descriptor instead.
 func (*AllLocations) Descriptor() ([]byte, []int) {
-	return file_location_pkg_models_proto_rawDescGZIP(), []int{1}
+	return file_location_pkg_models_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AllLocations) GetLocations() []*Location {
@@ -161,15 +205,20 @@ var File_location_pkg_models_proto protoreflect.FileDescriptor
 
 const file_location_pkg_models_proto_rawDesc = "" +
 	"\n" +
-	"\x19location-pkg-models.proto\x12\x06models\"\xb9\x01\n" +
+	"\x19location-pkg-models.proto\x12\x06models\"\xd5\x01\n" +
 	"\bLocation\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x18\n" +
 	"\acountry\x18\x03 \x01(\tR\acountry\x12\x12\n" +
 	"\x04lang\x18\x04 \x03(\tR\x04lang\x12\x1a\n" +
 	"\bcurrency\x18\x05 \x01(\tR\bcurrency\x12\x12\n" +
-	"\x04city\x18\x06 \x01(\tR\x04city\x12\x16\n" +
-	"\x06active\x18\a \x01(\bR\x06active\">\n" +
+	"\x04city\x18\x06 \x01(\tR\x04city\x122\n" +
+	"\n" +
+	"Activeness\x18\a \x01(\v2\x12.models.ActivenessR\n" +
+	"Activeness\")\n" +
+	"\n" +
+	"Activeness\x12\x1b\n" +
+	"\tis_active\x18\x01 \x01(\bR\bisActive\">\n" +
 	"\fAllLocations\x12.\n" +
 	"\tlocations\x18\x01 \x03(\v2\x10.models.LocationR\tlocationsB\x18Z\x16protocols/location-pkgb\x06proto3"
 
@@ -185,18 +234,20 @@ func file_location_pkg_models_proto_rawDescGZIP() []byte {
 	return file_location_pkg_models_proto_rawDescData
 }
 
-var file_location_pkg_models_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_location_pkg_models_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_location_pkg_models_proto_goTypes = []any{
 	(*Location)(nil),     // 0: models.Location
-	(*AllLocations)(nil), // 1: models.AllLocations
+	(*Activeness)(nil),   // 1: models.Activeness
+	(*AllLocations)(nil), // 2: models.AllLocations
 }
 var file_location_pkg_models_proto_depIdxs = []int32{
-	0, // 0: models.AllLocations.locations:type_name -> models.Location
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	1, // 0: models.Location.Activeness:type_name -> models.Activeness
+	0, // 1: models.AllLocations.locations:type_name -> models.Location
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_location_pkg_models_proto_init() }
@@ -210,7 +261,7 @@ func file_location_pkg_models_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_location_pkg_models_proto_rawDesc), len(file_location_pkg_models_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
