@@ -16,7 +16,7 @@ service locationService {
 
 message MealLocationReq {
     bytes meal_uuid =1;
-    bytes location_uuid =2;
+    string city =2;
     float price =3;
 }
 message LocationGetReq {

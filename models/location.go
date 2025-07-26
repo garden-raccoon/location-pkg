@@ -15,9 +15,9 @@ type Location struct {
 	Activeness   *Activeness `json:"activeness"`
 }
 type MealLocation struct {
-	LocationUuid uuid.UUID `json:"location_uuid"`
-	MealUUID     uuid.UUID `json:"meal_uuid"`
-	Price        float64   `json:"price"`
+	City     string    `json:"location_uuid"`
+	MealUUID uuid.UUID `json:"meal_uuid"`
+	Price    float64   `json:"price"`
 }
 
 type Activeness struct {

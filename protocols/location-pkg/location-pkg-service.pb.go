@@ -24,7 +24,7 @@ const (
 type MealLocationReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MealUuid      []byte                 `protobuf:"bytes,1,opt,name=meal_uuid,json=mealUuid,proto3" json:"meal_uuid,omitempty"`
-	LocationUuid  []byte                 `protobuf:"bytes,2,opt,name=location_uuid,json=locationUuid,proto3" json:"location_uuid,omitempty"`
+	City          string                 `protobuf:"bytes,2,opt,name=city,proto3" json:"city,omitempty"`
 	Price         float32                `protobuf:"fixed32,3,opt,name=price,proto3" json:"price,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -67,11 +67,11 @@ func (x *MealLocationReq) GetMealUuid() []byte {
 	return nil
 }
 
-func (x *MealLocationReq) GetLocationUuid() []byte {
+func (x *MealLocationReq) GetCity() string {
 	if x != nil {
-		return x.LocationUuid
+		return x.City
 	}
-	return nil
+	return ""
 }
 
 func (x *MealLocationReq) GetPrice() float32 {
@@ -209,10 +209,10 @@ var File_location_pkg_service_proto protoreflect.FileDescriptor
 
 const file_location_pkg_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1alocation-pkg-service.proto\x12\x06models\x1a\x19location-pkg-models.proto\"i\n" +
+	"\x1alocation-pkg-service.proto\x12\x06models\x1a\x19location-pkg-models.proto\"X\n" +
 	"\x0fMealLocationReq\x12\x1b\n" +
-	"\tmeal_uuid\x18\x01 \x01(\fR\bmealUuid\x12#\n" +
-	"\rlocation_uuid\x18\x02 \x01(\fR\flocationUuid\x12\x14\n" +
+	"\tmeal_uuid\x18\x01 \x01(\fR\bmealUuid\x12\x12\n" +
+	"\x04city\x18\x02 \x01(\tR\x04city\x12\x14\n" +
 	"\x05price\x18\x03 \x01(\x02R\x05price\"5\n" +
 	"\x0eLocationGetReq\x12#\n" +
 	"\rlocation_uuid\x18\x01 \x01(\fR\flocationUuid\"8\n" +

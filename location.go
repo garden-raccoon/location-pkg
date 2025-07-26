@@ -57,9 +57,9 @@ func (api *Api) UpdatePrices(m *models.MealLocation) error {
 	ctx, cancel := context.WithTimeout(context.Background(), api.timeout)
 	defer cancel()
 	req := &proto.MealLocationReq{
-		MealUuid:     m.MealUUID.Bytes(),
-		LocationUuid: m.LocationUuid.Bytes(),
-		Price:        float32(m.Price),
+		MealUuid: m.MealUUID.Bytes(),
+		City:     m.City,
+		Price:    float32(m.Price),
 	}
 	_, err := api.LocationServiceClient.UpdatePrices(ctx, req)
 	if err != nil {
